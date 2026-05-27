@@ -8,9 +8,7 @@ import { useControlRotateClockwise } from './useControlRotateClockwise';
 import { ControlRotateCounterclockwise } from './ControlRotateConterclockwise';
 import { MapWrapper } from './MapWrapper';
 
-
 import dtpData from './data/dtp-data.json';
-
 
 export const MAP_CENTER = [39.89071, 57.625966];
 
@@ -36,8 +34,6 @@ export default function Mapgl() {
 
             map.on('click', (e) => console.log(e));
 
-            
-
             // 1. Создаём источник данных из GeoJSON файла
             const source = new mapgl.GeoJsonSource(map, {
                 data: dtpData as any,
@@ -46,26 +42,7 @@ export default function Mapgl() {
                 },
             });
 
-            
-            const pointsLayer: any = {
-                id: 'dtp-points-layer',
-                filter: ['match', ['sourceAttr', 'dataType'], ['dtp'], true, false],
-                type: 'point',
-                style: {
-                    iconImage: 'road-accident',
-                    iconWidth: 18,
-                    textField: ['get', 'category'],
-                    textFont: ['Noto_Sans'],
-                    textColor: '#D5A2AA',
-                    textHaloColor: '#ffffff',
-                    textHaloWidth: 2,
-                    textSize: 12,
-                    iconPriority: 100,
-                    textPriority: 110,
-                },
-            };
-
-            
+            // Слой с тепловой картой
             const heatmapLayer: any = {
                 id: 'dtp-heatmap-layer',
                 filter: ['match', ['sourceAttr', 'dataType'], ['dtp'], true, false],
@@ -89,11 +66,30 @@ export default function Mapgl() {
                 },
             };
 
-            // 4. Добавляем слой на карту
+            // Слой с точками и подписью-тяжестью ДТП
+            const pointsLayer: any = {
+                id: 'dtp-points-layer',
+                filter: ['match', ['sourceAttr', 'dataType'], ['dtp'], true, false],
+                type: 'point',
+                style: {
+                    iconImage: 'road-accident',
+                    iconWidth: 18,
+                    textField: ['get', 'severity'],   // ← ЗДЕСЬ: тяжесть ДТП
+                    textFont: ['Noto_Sans'],
+                    textColor: '#D5A2AA',
+                    textHaloColor: '#ffffff',
+                    textHaloWidth: 2,
+                    textSize: 12,
+                    iconPriority: 100,
+                    textPriority: 110,
+                },
+            };
+
+            // Добавляем слой на карту (сейчас активна тепловая карта)
             map.on('styleload', () => {
                 if (map) {
-                    //map.addLayer(heatmapLayer);
-                    map.addLayer(pointsLayer);
+                    //map.addLayer(heatmapLayer);   // тепловая карта
+                    map.addLayer(pointsLayer);    // раскомментировать для точек
                 }
             });
 
