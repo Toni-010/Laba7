@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Toni-010/Laba7.git/static/css/main.7f4dc822.css",
+    "main.js": "/Toni-010/Laba7.git/static/js/main.9db46f0e.js",
+    "index.html": "/Toni-010/Laba7.git/index.html",
+    "main.7f4dc822.css.map": "/Toni-010/Laba7.git/static/css/main.7f4dc822.css.map",
+    "main.9db46f0e.js.map": "/Toni-010/Laba7.git/static/js/main.9db46f0e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7f4dc822.css",
+    "static/js/main.9db46f0e.js"
+  ]
+}
