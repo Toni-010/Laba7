@@ -74,7 +74,7 @@ export default function Mapgl() {
                 style: {
                     iconImage: 'road-accident',
                     iconWidth: 18,
-                    textField: ['get', 'severity'],   // ← ЗДЕСЬ: тяжесть ДТП
+                    textField: ['get', 'severity'],
                     textFont: ['Noto_Sans'],
                     textColor: '#D5A2AA',
                     textHaloColor: '#ffffff',
